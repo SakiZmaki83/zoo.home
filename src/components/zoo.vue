@@ -38,6 +38,21 @@
       </tr>
       </tbody>
     </table>
+
+    <table>
+       <thead>
+          <th>Name</th>
+          <th>Surface</th>
+       </thead>
+
+       <tbody>
+       <tr v-for="(sector, key) in sectors" :key="key">
+        <td>{{ sector.name }}</td>
+        <td>{{ sector.surface }}</td>
+       <td><button @click="seeAnimals(sector.name)">See animals</button></td>
+        </tr>
+       </tbody>
+    </table>
   
   </div>
 </template>
@@ -55,6 +70,7 @@ export default {
   name: 'AnimalList',
  data(){
    return{
+     sectors: sectors,
      animals: [
        {species:'lion', name:'Simba', date: '2016', sector: sectors[3]},
        {species:'monkey', name:'Chita', date: '2017',sector: sectors[0]},
@@ -81,6 +97,14 @@ export default {
    addAnimal(){
      this.animals.push(this.newAnimal);
      this.newAnimal = {};
+   },
+  seeAnimals(sectorName) {
+      let animals = this.animals
+        .filter(animal => animal.sector.name === sectorName)
+        .map(animal => animal.species + ' ' + animal.name)
+        .join('\n');
+      
+      alert(animals);
    }
  }
 }
