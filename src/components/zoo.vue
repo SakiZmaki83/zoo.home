@@ -10,6 +10,7 @@
 
   <label for="date">Date</label>
   <input type="number" id="date" v-model="newAnimal.date">
+
   
   <button type="submit">Add animal</button>
   </form>
@@ -18,12 +19,19 @@
         <th>Species</th>
         <th>Name</th>
         <th>Date</th>
+        <th>Sector</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        
+        
+       
       </thead>
       <tbody>
       <tr v-for="(animal, key) in animals" :key="key">
         <td>{{ animal.species }}</td>
         <td>{{ animal.name }}</td>
         <td>{{ animal.date ? animal.date : 'nepoznat' }}</td>
+        <td>{{ animal.sector.name }}</td>
         <td><button @click="remove(animal)">Remove animal</button></td>
         <td><button @click="topFunction(animal)">Move to top</button></td>
 
@@ -35,21 +43,30 @@
 </template>
 
 <script>
+const sectors = [
+        { name: 'Forest animals', surface: 'Cages' },
+        { name: 'Forest', surface: 'Terarium' },
+        { name: 'Ocean animals', surface: 'Aquarium' },
+        { name: 'Savannah', surface: 'Cages' }
+      ];
+
+
 export default {
   name: 'AnimalList',
  data(){
    return{
      animals: [
-       {species:'lion', name:'Simba', date: '2016'},
-       {species:'monkey', name:'Chita', date: '2017'},
-       {species:'fish', name:'Nemo', date: ''},
-       {species:'iguana', name:'Kamy', date: '2018'},
-       {species:'snake', name:'Set', date: ''}
+       {species:'lion', name:'Simba', date: '2016', sector: sectors[3]},
+       {species:'monkey', name:'Chita', date: '2017',sector: sectors[0]},
+       {species:'fish', name:'Nemo', date: '',sector: sectors[2]},
+       {species:'iguana', name:'Kamy', date: '2018',sector: sectors[1]},
+       {species:'snake', name:'Set', date: '',sector: sectors[1]}
      ],
      newAnimal: {
        species: '',
        name: '',
-       date: ''
+       date: '',
+       sector: ''
      }
    }
  },
