@@ -11,6 +11,7 @@
         <td>{{ animal.species }}</td>
         <td>{{ animal.name }}</td>
         <td>{{ animal.date ? animal.date : 'nepoznat' }}</td>
+        <td><button @click="remove(animal)">Remove animal</button></td>
       </tr>
       </tbody>
     </table>
@@ -30,6 +31,11 @@ export default {
        {species:'iguana', name:'Kamy', date: '2018'},
        {species:'snake', name:'Set', date: ''}
      ]
+   }
+ },
+ methods: {
+   remove(animal){
+     this.animals.splice(this.animals.indexOf(animal), 1)
    }
  }
 }
