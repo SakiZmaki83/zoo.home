@@ -10,7 +10,7 @@
       <tr v-for="(animal, key) in animals" :key="key">
         <td>{{ animal.species }}</td>
         <td>{{ animal.name }}</td>
-        <td>{{ animal.date }}</td>
+        <td>{{ animal.date ? animal.date : 'nepoznat' }}</td>
       </tr>
       </tbody>
     </table>
