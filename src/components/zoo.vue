@@ -1,5 +1,18 @@
 <template>
   <div>
+  <form @submit.prevent="addAnimal">
+
+  <label for="species">Species</label>
+  <input type="text" id="species" v-model="newAnimal.species">
+
+  <label for="name">Name</label>
+  <input type="text" id="name" v-model="newAnimal.name">
+
+  <label for="date">Date</label>
+  <input type="number" id="date" v-model="newAnimal.date">
+  
+  <button type="submit">Add animal</button>
+  </form>
     <table>
       <thead>
         <th>Species</th>
@@ -32,7 +45,12 @@ export default {
        {species:'fish', name:'Nemo', date: ''},
        {species:'iguana', name:'Kamy', date: '2018'},
        {species:'snake', name:'Set', date: ''}
-     ]
+     ],
+     newAnimal: {
+       species: '',
+       name: '',
+       date: ''
+     }
    }
  },
  methods: {
@@ -42,6 +60,10 @@ export default {
    topFunction(animal){
      this.animals.splice(this.animals.indexOf(animal), 1)
      this.animals.unshift(animal);
+   },
+   addAnimal(){
+     this.animals.push(this.newAnimal);
+     this.newAnimal = {};
    }
  }
 }
